@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://nalvv0qdyvup"]
+
+[ext_resource type="Texture2D" uid="uid://bibljbbk1g7is" path="res://Sprites/Background/testBackground.png" id="1_dpck2"]
+[ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
+[ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="2_3qwve"]
+
+[node name="main" type="Node2D"]
+
+[node name="background" type="Sprite2D" parent="."]
+position = Vector2(141, 343)
+texture = ExtResource("1_dpck2")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_frwqt")]
+position = Vector2(905, 464)
+
+[node name="Events" type="Node2D" parent="."]
+
+[node name="Event" parent="Events" instance=ExtResource("2_3qwve")]
+position = Vector2(2014, -1943)
+
+[node name="Event2" parent="Events" instance=ExtResource("2_3qwve")]
+position = Vector2(-2159, 2203)
+
+[node name="Event3" parent="Events" instance=ExtResource("2_3qwve")]
+position = Vector2(3600, 984)
+
+[node name="Event4" parent="Events" instance=ExtResource("2_3qwve")]
+position = Vector2(-2153, -571)
+
+[node name="Event5" parent="Events" instance=ExtResource("2_3qwve")]
+position = Vector2(3181, -559)

@@ -24,15 +24,17 @@ func handle_controls(delta):
 	# Movement
 	var input := Vector2.ZERO
 	
-	input.x = Input.get_axis("move_left", "move_right")
+	input.x = Input.get_axis("move_right", "move_left")
 	input.y = Input.get_axis("move_up", "move_down")
 	
-	velocity = input * movement_speed
+	velocity = cartesian_to_isommetric(input).normalized() * movement_speed
 	
 func handle_position(delta):
 	position += velocity * delta
 	
 	if velocity.length() == 0: return
-	
 	sprite.flip_h = velocity.x < 0
+	
+func cartesian_to_isommetric(cartesian):
+	return Vector2(cartesian.y - cartesian.x, (cartesian.y + cartesian.x) / 2)
 

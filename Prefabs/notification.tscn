@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://drhy1lmqves2p"]
+
+[ext_resource type="Script" path="res://Scripts/offScreenNotification.gd" id="1_3665i"]
+[ext_resource type="Texture2D" uid="uid://cggobfw3p80tt" path="res://Sprites/UI/notification_arrow.png" id="2_2qc3t"]
+[ext_resource type="Texture2D" uid="uid://dihae6dh3udr8" path="res://Sprites/UI/notification_circle.png" id="2_8l84a"]
+
+[node name="notification" type="Node2D"]
+script = ExtResource("1_3665i")
+
+[node name="model" type="Node2D" parent="."]
+
+[node name="circle" type="Sprite2D" parent="model"]
+position = Vector2(-52, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("2_8l84a")
+
+[node name="arrow" type="Sprite2D" parent="model"]
+position = Vector2(-16, 0)
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_2qc3t")
