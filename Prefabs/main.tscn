@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=7 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="Texture2D" uid="uid://bibljbbk1g7is" path="res://Sprites/Background/testBackground.png" id="1_dpck2"]
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="2_3qwve"]
+[ext_resource type="Script" path="res://Prefabs/event_manager.gd" id="4_b5v11"]
 [ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wqw"]
-radius = 84.6539
+radius = 92.0869
 
 [node name="main" type="Node2D"]
 
@@ -14,25 +15,31 @@ radius = 84.6539
 position = Vector2(141, 343)
 texture = ExtResource("1_dpck2")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_frwqt")]
+[node name="Player" parent="." instance=ExtResource("1_frwqt")]
 position = Vector2(905, 464)
 
 [node name="Events" type="Node2D" parent="."]
+script = ExtResource("4_b5v11")
 
 [node name="Event" parent="Events" instance=ExtResource("2_3qwve")]
 position = Vector2(2014, -1943)
+spawn_probability = 30.18
 
 [node name="Event2" parent="Events" instance=ExtResource("2_3qwve")]
-position = Vector2(-2159, 2203)
+position = Vector2(-2217, 2239)
+spawn_probability = 31.982
 
 [node name="Event3" parent="Events" instance=ExtResource("2_3qwve")]
-position = Vector2(3600, 984)
+position = Vector2(3681, 1085)
+spawn_probability = 12.162
 
 [node name="Event4" parent="Events" instance=ExtResource("2_3qwve")]
-position = Vector2(-2153, -571)
+position = Vector2(-2093, -495)
+spawn_probability = 59.009
 
 [node name="Event5" parent="Events" instance=ExtResource("2_3qwve")]
 position = Vector2(3181, -559)
+spawn_probability = 87.838
 
 [node name="Buildings" type="Node2D" parent="."]
 
@@ -118,18 +125,14 @@ position = Vector2(208, -37)
 position = Vector2(3179, -525)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Main/Wheel"]
-position = Vector2(-5, 0)
-rotation = -0.633555
-skew = -0.387463
+position = Vector2(-6, -16)
 shape = SubResource("CircleShape2D_o1wqw")
 
 [node name="Wheel2" type="StaticBody2D" parent="Buildings/Main"]
 position = Vector2(3179, -525)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Main/Wheel2"]
-position = Vector2(-3879, 3096)
-rotation = -0.633555
-skew = -0.387463
+position = Vector2(-3883, 3076)
 shape = SubResource("CircleShape2D_o1wqw")
 
 [node name="church" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]

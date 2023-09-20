@@ -11,8 +11,9 @@ radius = 78.0064
 [node name="Event" type="Node2D"]
 visible = false
 script = ExtResource("1_70tta")
+delay = 15
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="MissionOrigin" type="Sprite2D" parent="."]
 texture = ExtResource("2_aeuml")
 
 [node name="notification" parent="." instance=ExtResource("2_651dk")]
@@ -22,7 +23,7 @@ texture = ExtResource("2_aeuml")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hint_trigger"]
 shape = SubResource("CircleShape2D_mhucg")
 
-[node name="hint" type="Sprite2D" parent="."]
+[node name="hint" type="Sprite2D" parent="hint_trigger"]
 visible = false
 texture_filter = 1
 position = Vector2(0, -72)

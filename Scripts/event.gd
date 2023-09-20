@@ -1,51 +1,84 @@
 extends Node2D
 
+signal event_activated
+signal event_resolved
+
 @export_category("Parameters")
-@export var spawn_probability := 50.0
+@export_range(0, 100) var spawn_probability := 50.0
+@export var npc_requirement := 0
 @export var execution_time := 2
 @export var cool_down := 5 # Min time between activations
 @export var delay := 5 # Time required for event to try to init
 
+var npcs = []
 var try_count := 0.0;
-var isActive := false;
-var isPlayer := false;
+var is_active := false;
+var is_player := false;
 
 # Components
 @onready var notification = $notification
+#@onready var minigame = $minigame
 @onready var trigger = $hint_trigger
-@onready var hint = $hint
+@onready var hint = $hint_trigger/hint
 @onready var rng = RandomNumberGenerator.new()
+@onready var event_manager = get_parent()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	try_count += 1 * delta;
-	if !isActive && try_count >= delay: 
-		start_event()
-		try_count = 0
+	
+	check_conditions()
+
 
 # Wait for player to use interact in order to complete event
 func _input(event):
-	if event.is_action_released("Interact") && isActive && isPlayer:
-		complete_event()
+	if event.is_action_released("Interact") && is_active && is_player:
+#		if minigame != null:
+#			minigame.start()
+#		else:
+			complete_event()
+
+
+func check_conditions():	
+	if npcs.size() >= npc_requirement \
+			&& !is_active && !is_player \
+			&& try_count >= delay \
+			&& event_manager.active_events < event_manager.max_events:
+		start_event()
+	
+	if try_count >= delay:
+		try_count = 0
+
 
 # Try's to init the event using the given %
 func start_event():
+	try_count = 0
+	
 	if rng.randf_range(0.0, 1.0) > spawn_probability / 100:
-		isActive = true
+		event_manager.active_events += 1
+		is_active = true
 		show()
+
 
 # Disable the event and wait x seconds before beeing available for activation
 func complete_event():
 	hide()
+	event_manager.active_events -= 1
+	
 	await get_tree().create_timer(delay).timeout
-	isActive = false
+	
+	is_active = false
 	try_count = 0
+
 
 # Player detection
 func _on_hint_trigger_body_entered(body):
-	hint.show()
-	isPlayer = true
+	if body.name == "Player":
+		hint.show()
+		is_player = true
+
 
 func _on_hint_trigger_body_exited(body):
-	hint.hide()
-	isPlayer = false
+	if body.name == "Player":
+		hint.hide()
+		is_player = false
