@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp32u0v5b3y2s"]
+[gd_scene load_steps=6 format=3 uid="uid://bp32u0v5b3y2s"]
 
-[ext_resource type="Texture2D" uid="uid://b8flt4fylma0j" path="res://Sprites/UI/EventCircle.png" id="1_6bbfg"]
 [ext_resource type="Script" path="res://Scripts/event.gd" id="1_70tta"]
 [ext_resource type="PackedScene" uid="uid://drhy1lmqves2p" path="res://Prefabs/notification.tscn" id="2_651dk"]
+[ext_resource type="Texture2D" uid="uid://b8flt4fylma0j" path="res://Sprites/UI/Event/EventCircle.png" id="2_aeuml"]
+[ext_resource type="Texture2D" uid="uid://cls0p8y1h8ifi" path="res://Sprites/UI/Hints/InteractXbox.png" id="4_r8vyi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhucg"]
 radius = 78.0064
@@ -12,7 +13,7 @@ visible = false
 script = ExtResource("1_70tta")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6bbfg")
+texture = ExtResource("2_aeuml")
 
 [node name="notification" parent="." instance=ExtResource("2_651dk")]
 
@@ -20,3 +21,13 @@ texture = ExtResource("1_6bbfg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hint_trigger"]
 shape = SubResource("CircleShape2D_mhucg")
+
+[node name="hint" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(0, -72)
+scale = Vector2(3, 3)
+texture = ExtResource("4_r8vyi")
+
+[connection signal="body_entered" from="hint_trigger" to="." method="_on_hint_trigger_body_entered"]
+[connection signal="body_exited" from="hint_trigger" to="." method="_on_hint_trigger_body_exited"]

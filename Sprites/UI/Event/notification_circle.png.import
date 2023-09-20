@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dihae6dh3udr8"
-path="res://.godot/imported/notification_circle.png-7c7466d2e17e1a69c5b497a8a363c5cf.ctex"
+path="res://.godot/imported/notification_circle.png-9bc7bf1ca429e6281e2bc176b23773ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/notification_circle.png"
-dest_files=["res://.godot/imported/notification_circle.png-7c7466d2e17e1a69c5b497a8a363c5cf.ctex"]
+source_file="res://Sprites/UI/Event/notification_circle.png"
+dest_files=["res://.godot/imported/notification_circle.png-9bc7bf1ca429e6281e2bc176b23773ad.ctex"]
 
 [params]
 

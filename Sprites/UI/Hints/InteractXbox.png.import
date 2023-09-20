@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cggobfw3p80tt"
-path="res://.godot/imported/notification_arrow.png-7215b1f1bcda394dea218479630d2da0.ctex"
+uid="uid://cls0p8y1h8ifi"
+path="res://.godot/imported/InteractXbox.png-907c55e10860fb4d24f99aab244f4de2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/UI/notification_arrow.png"
-dest_files=["res://.godot/imported/notification_arrow.png-7215b1f1bcda394dea218479630d2da0.ctex"]
+source_file="res://Sprites/UI/Hints/InteractXbox.png"
+dest_files=["res://.godot/imported/InteractXbox.png-907c55e10860fb4d24f99aab244f4de2.ctex"]
 
 [params]
 
