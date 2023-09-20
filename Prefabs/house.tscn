@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dex1hl4wccske"]
+
+[node name="House" type="StaticBody2D"]
+position = Vector2(1676, 911)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-1, -77, 271, 62, -3, 198, -276, 57)

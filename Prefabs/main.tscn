@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=6 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="Texture2D" uid="uid://bibljbbk1g7is" path="res://Sprites/Background/testBackground.png" id="1_dpck2"]
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="2_3qwve"]
+[ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1wqw"]
+radius = 84.6539
 
 [node name="main" type="Node2D"]
 
@@ -29,3 +33,157 @@ position = Vector2(-2153, -571)
 
 [node name="Event5" parent="Events" instance=ExtResource("2_3qwve")]
 position = Vector2(3181, -559)
+
+[node name="Buildings" type="Node2D" parent="."]
+
+[node name="Houses" type="Node2D" parent="Buildings"]
+
+[node name="House" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+
+[node name="House2" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(609, 1436)
+
+[node name="House3" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(1307, 2162)
+
+[node name="House" parent="Buildings/Houses/House3" instance=ExtResource("4_i7ecr")]
+position = Vector2(147, -73)
+
+[node name="House4" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-949, 1600)
+
+[node name="House5" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-1839, 1150)
+
+[node name="House6" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-1764, 383)
+
+[node name="House7" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-143, -396)
+
+[node name="House" parent="Buildings/Houses/House7" instance=ExtResource("4_i7ecr")]
+position = Vector2(150, -72)
+
+[node name="House8" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(1356, -498)
+
+[node name="House9" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(1973, -183)
+
+[node name="House10" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(2623, 308)
+
+[node name="House11" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-1221, -889)
+
+[node name="House12" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(-636, -1202)
+
+[node name="House13" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(2977, 1805)
+
+[node name="House14" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(3116, 1874)
+
+[node name="House15" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(4847, -943)
+
+[node name="House16" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(5152, -797)
+
+[node name="House17" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(3877, -1570)
+
+[node name="House18" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(3571, -1705)
+
+[node name="House19" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
+position = Vector2(3309, -1851)
+
+[node name="House" parent="Buildings/Houses/House19" instance=ExtResource("4_i7ecr")]
+position = Vector2(-205, -101)
+
+[node name="Main" type="Node2D" parent="Buildings"]
+
+[node name="Police" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(338, 385)
+
+[node name="House" parent="Buildings/Main/Police" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -133)
+
+[node name="House2" parent="Buildings/Main/Police" instance=ExtResource("4_i7ecr")]
+position = Vector2(208, -37)
+
+[node name="Wheel" type="StaticBody2D" parent="Buildings/Main"]
+position = Vector2(3179, -525)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Main/Wheel"]
+position = Vector2(-5, 0)
+rotation = -0.633555
+skew = -0.387463
+shape = SubResource("CircleShape2D_o1wqw")
+
+[node name="Wheel2" type="StaticBody2D" parent="Buildings/Main"]
+position = Vector2(3179, -525)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Buildings/Main/Wheel2"]
+position = Vector2(-3879, 3096)
+rotation = -0.633555
+skew = -0.387463
+shape = SubResource("CircleShape2D_o1wqw")
+
+[node name="church" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(-3719, -195)
+
+[node name="House" parent="Buildings/Main/church" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -135)
+
+[node name="church2" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(-2394, -588)
+
+[node name="House" parent="Buildings/Main/church2" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -135)
+
+[node name="horseHouse" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(741, -1344)
+
+[node name="House" parent="Buildings/Main/horseHouse" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -135)
+
+[node name="horseHouse2" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(-78, 2314)
+
+[node name="House" parent="Buildings/Main/horseHouse2" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -135)
+
+[node name="horseHouse3" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
+position = Vector2(3371, 1001)
+
+[node name="House" parent="Buildings/Main/horseHouse3" instance=ExtResource("4_i7ecr")]
+position = Vector2(272, -135)
+
+[node name="River" type="Node2D" parent="Buildings"]
+
+[node name="River_top" type="StaticBody2D" parent="Buildings/River"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/River/River_top"]
+build_mode = 1
+polygon = PackedVector2Array(-1210, -1689, 24, -1055, -1385, -339, -1133, -192, 584, -1051, -952, -1843)
+
+[node name="River_midtop" type="StaticBody2D" parent="Buildings/River"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/River/River_midtop"]
+build_mode = 1
+polygon = PackedVector2Array(-1548, -251, -2909, 433, -1457, 1180, -1205, 1021, -2370, 438, -1284, -107)
+
+[node name="River_midbot" type="StaticBody2D" parent="Buildings/River"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/River/River_midbot"]
+build_mode = 1
+polygon = PackedVector2Array(2773, 1114, 595, 2198, -1310, 1253, -1046, 1109, 572, 1923, 2495, 966)
+
+[node name="River_bot" type="StaticBody2D" parent="Buildings/River"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/River/River_bot"]
+build_mode = 1
+polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 101, 2652, 886)
