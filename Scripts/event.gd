@@ -11,6 +11,7 @@ var isActive := false;
 
 # Components
 @onready var notification = $notification
+@onready var trigger = $hint_trigger
 @onready var rng = RandomNumberGenerator.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,5 +28,6 @@ func start_event():
 		print_debug("Event initiated")
 		isActive = true
 		show()
+		
 
 

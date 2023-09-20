@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bp32u0v5b3y2s"]
+[gd_scene load_steps=5 format=3 uid="uid://bp32u0v5b3y2s"]
 
 [ext_resource type="Texture2D" uid="uid://b8flt4fylma0j" path="res://Sprites/UI/EventCircle.png" id="1_6bbfg"]
 [ext_resource type="Script" path="res://Scripts/event.gd" id="1_70tta"]
 [ext_resource type="PackedScene" uid="uid://drhy1lmqves2p" path="res://Prefabs/notification.tscn" id="2_651dk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mhucg"]
+radius = 78.0064
 
 [node name="Event" type="Node2D"]
 visible = false
@@ -12,3 +15,8 @@ script = ExtResource("1_70tta")
 texture = ExtResource("1_6bbfg")
 
 [node name="notification" parent="." instance=ExtResource("2_651dk")]
+
+[node name="hint_trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hint_trigger"]
+shape = SubResource("CircleShape2D_mhucg")
