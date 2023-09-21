@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 var target : Vector2
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
+@onready var manager = get_parent()
 
 func _physics_process(delta):
 	handle_controls()
@@ -19,18 +20,14 @@ func handle_controls():
 	# Movement
 	var input := Vector2.ZERO
 	
-	if target == null:
-		nav.target_position = get_new_target()
+	if nav.target_position == null:
+		nav.target_position = manager._get_position()
 	
-	#velocity = adjust_diagonal_movement(input.normalized()) * movement_speed
+	
+	
 	
 func handle_position(delta):
 	position += velocity * delta
 	
 	if velocity.length() == 0: return
 	sprite.flip_h = velocity.x < 0
-	
-func get_new_target():
-	pass
-	#it will take from a list of points, a random one
-	

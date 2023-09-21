@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=10 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="Texture2D" uid="uid://co3ihpwcy46fv" path="res://Sprites/Background/testbackground.png" id="1_w8vgg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
 [ext_resource type="PackedScene" uid="uid://bjl71q8ph3q5o" path="res://Nodes/Events/bar_fight.tscn" id="5_0wqqi"]
 [ext_resource type="PackedScene" uid="uid://cdtqgo5idap74" path="res://Nodes/Events/wheel.tscn" id="6_m5r75"]
+[ext_resource type="Script" path="res://Prefabs/npc_manager.gd" id="8_gaasa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wqw"]
 radius = 92.0869
@@ -22,30 +23,37 @@ position = Vector2(905, 464)
 [node name="Events" type="Node2D" parent="."]
 script = ExtResource("3_whmi1")
 
-[node name="BarFight" parent="Events" instance=ExtResource("2_3qwve")]
+[node name="Crops" parent="Events" instance=ExtResource("2_3qwve")]
 visible = false
 position = Vector2(1780, -2192)
 spawn_probability = 30.18
+execution_time = 10
+delay = 3
 
 [node name="Event2" parent="Events" instance=ExtResource("2_3qwve")]
+process_mode = 4
 visible = false
 position = Vector2(-2300, 1887)
 spawn_probability = 31.982
 execution_time = 20
 
 [node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
+process_mode = 4
 visible = false
 position = Vector2(3534, 784)
 
 [node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
+process_mode = 4
 visible = false
 position = Vector2(-2292, -804)
 spawn_probability = 40.896
 
 [node name="wheel_right" parent="Events" instance=ExtResource("6_m5r75")]
+process_mode = 4
 position = Vector2(2986, -860)
 
 [node name="wheel_left" parent="Events" instance=ExtResource("6_m5r75")]
+process_mode = 4
 position = Vector2(-893, 2246)
 
 [node name="Buildings" type="Node2D" parent="."]
@@ -201,3 +209,4 @@ build_mode = 1
 polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 101, 2652, 886)
 
 [node name="NPC" type="Node2D" parent="."]
+script = ExtResource("8_gaasa")

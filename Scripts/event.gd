@@ -14,6 +14,7 @@ var npcs = []
 var try_count := 0.0
 var active_count := 0.0
 var is_active := false
+var is_available := true
 var is_player := false
 
 # Components
@@ -30,7 +31,7 @@ func _process(delta):
 	
 	check_conditions()
 	
-	if is_active : active_countdown(delta)
+	if !is_available && is_active : active_countdown(delta)
 
 
 # Wait for player to use interact in order to complete event
@@ -58,6 +59,7 @@ func start_event():
 	
 	if rng.randf_range(0.0, 1.0) > spawn_probability / 100:
 		event_manager.active_events += 1
+		is_available = false
 		is_active = true
 		show()
 
@@ -70,10 +72,10 @@ func complete_event(success):
 	
 	hide()
 	event_manager.active_events -= 1
-	
-	await get_tree().create_timer(delay).timeout
-	
 	is_active = false
+	
+	await get_tree().create_timer(cool_down).timeout
+	is_available = true
 	try_count = 0
 
 
