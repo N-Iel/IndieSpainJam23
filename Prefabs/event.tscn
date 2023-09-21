@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cls0p8y1h8ifi" path="res://Sprites/UI/Hints/InteractXbox.png" id="4_r8vyi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mhucg"]
-radius = 78.0064
+radius = 105.043
 
 [node name="Event" type="Node2D"]
-visible = false
 script = ExtResource("1_70tta")
 delay = 15
 
@@ -29,6 +28,8 @@ texture_filter = 1
 position = Vector2(0, -72)
 scale = Vector2(3, 3)
 texture = ExtResource("4_r8vyi")
+
+[node name="minigame" type="Node2D" parent="."]
 
 [connection signal="body_entered" from="hint_trigger" to="." method="_on_hint_trigger_body_entered"]
 [connection signal="body_exited" from="hint_trigger" to="." method="_on_hint_trigger_body_exited"]

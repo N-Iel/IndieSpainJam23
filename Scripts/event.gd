@@ -11,9 +11,10 @@ signal event_resolved
 @export var delay := 5 # Time required for event to try to init
 
 var npcs = []
-var try_count := 0.0;
-var is_active := false;
-var is_player := false;
+var try_count := 0.0
+var active_count := 0.0
+var is_active := false
+var is_player := false
 
 # Components
 @onready var notification = $notification
@@ -28,6 +29,8 @@ func _process(delta):
 	try_count += 1 * delta;
 	
 	check_conditions()
+	
+	if is_active : active_countdown(delta)
 
 
 # Wait for player to use interact in order to complete event
@@ -36,7 +39,7 @@ func _input(event):
 #		if minigame != null:
 #			minigame.start()
 #		else:
-			complete_event()
+			complete_event(true)
 
 
 func check_conditions():	
@@ -45,8 +48,7 @@ func check_conditions():
 			&& try_count >= delay \
 			&& event_manager.active_events < event_manager.max_events:
 		start_event()
-	
-	if try_count >= delay:
+	elif try_count >= delay:
 		try_count = 0
 
 
@@ -61,7 +63,11 @@ func start_event():
 
 
 # Disable the event and wait x seconds before beeing available for activation
-func complete_event():
+func complete_event(success):
+	
+	if !success : 
+		event_manager.events_failed += 1
+	
 	hide()
 	event_manager.active_events -= 1
 	
@@ -71,14 +77,24 @@ func complete_event():
 	try_count = 0
 
 
+func active_countdown(delta):
+	active_count += 1 * delta;
+	if active_count >= execution_time:
+		complete_event(false)
+
+
 # Player detection
 func _on_hint_trigger_body_entered(body):
 	if body.name == "Player":
 		hint.show()
 		is_player = true
+	elif body.get_parent().name == "npc":
+		npcs.push_front(body)
 
 
 func _on_hint_trigger_body_exited(body):
 	if body.name == "Player":
 		hint.hide()
 		is_player = false
+	elif body.get_parent().name == "NPC":
+		npcs.erase(body)

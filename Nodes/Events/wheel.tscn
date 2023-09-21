@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdtqgo5idap74"]
+
+[ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="1_ed15e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8c3ss"]
+radius = 140.357
+
+[node name="wheel" instance=ExtResource("1_ed15e")]
+visible = false
+execution_time = 20
+cool_down = 25
+
+[node name="CollisionShape2D" parent="hint_trigger" index="0"]
+shape = SubResource("CircleShape2D_8c3ss")

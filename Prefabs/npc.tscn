@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhntcoevrhqtt"]
+
+[ext_resource type="Script" path="res://Prefabs/npc.gd" id="1_q3ing"]
+[ext_resource type="Texture2D" uid="uid://dv0cpn7kvowi6" path="res://Sprites/Characters/player.png" id="1_xwt0x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_46n01"]
+radius = 27.0
+height = 80.0
+
+[node name="NPC" type="CharacterBody2D"]
+script = ExtResource("1_q3ing")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.365, 0.365)
+texture = ExtResource("1_xwt0x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 79)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_46n01")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
