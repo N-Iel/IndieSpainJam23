@@ -10,7 +10,6 @@ radius = 105.043
 
 [node name="Event" type="Node2D"]
 script = ExtResource("1_70tta")
-delay = 15
 
 [node name="MissionOrigin" type="Sprite2D" parent="."]
 texture = ExtResource("2_aeuml")

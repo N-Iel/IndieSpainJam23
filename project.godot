@@ -53,6 +53,10 @@ Interact={
 ]
 }
 
+[navigation]
+
+2d/default_edge_connection_margin=100
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdk3pdualub8x"
-path="res://.godot/imported/player.png-0dc26c83808a988a9def491320b53dcd.ctex"
+uid="uid://cnrmf73hxmyna"
+path="res://.godot/imported/taverner.png-ead6cd3fba2bd3650717fbc67049c509.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Characters/player.png"
-dest_files=["res://.godot/imported/player.png-0dc26c83808a988a9def491320b53dcd.ctex"]
+source_file="res://Sprites/Characters/taverner.png"
+dest_files=["res://.godot/imported/taverner.png-ead6cd3fba2bd3650717fbc67049c509.ctex"]
 
 [params]
 

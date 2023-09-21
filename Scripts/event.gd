@@ -1,102 +1,113 @@
 extends Node2D
 
-signal event_activated
-signal event_resolved
+enum Type {Common = 0, Rare = 1, Unique = 2}
 
-@export_category("Parameters")
-@export_range(0, 100) var spawn_probability := 50.0
-@export var npc_requirement := 0
-@export var execution_time := 2
-@export var cool_down := 5 # Min time between activations
-@export var delay := 5 # Time required for event to try to init
+@export var execution_time := 5.0
+@export var npc_required := 0
+@export var available := true
+@export var max_npc := 1
+@export var delay := 5.0
+@export var type : Type
 
-var npcs = []
-var try_count := 0.0
-var active_count := 0.0
-var is_active := false
-var is_available := true
-var is_player := false
 
-# Components
-@onready var notification = $notification
-#@onready var minigame = $minigame
-@onready var trigger = $hint_trigger
-@onready var hint = $hint_trigger/hint
-@onready var rng = RandomNumberGenerator.new()
 @onready var event_manager = get_parent()
+@onready var original_type = type
+@onready var notification := $notification
+@onready var minigame := $minigame
+@onready var hint := $hint_trigger
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	try_count += 1 * delta;
-	
-	check_conditions()
-	
-	if !is_available && is_active : active_countdown(delta)
+var npc_list := []
+var player_inside := false
+var minigame_active := false
+var active := false
+var timer
 
-
-# Wait for player to use interact in order to complete event
 func _input(event):
-	if event.is_action_released("Interact") && is_active && is_player:
+	if event.is_action_released("Interact") && available && !minigame_active:
 #		if minigame != null:
-#			minigame.start()
+#			#minigame?.start()
+#			print("Minigame started")
 #		else:
-			complete_event(true)
+		_complete_event(true)
 
 
-func check_conditions():	
-	if npcs.size() >= npc_requirement \
-			&& !is_active && !is_player \
-			&& try_count >= delay \
-			&& event_manager.active_events < event_manager.max_events:
-		start_event()
-	elif try_count >= delay:
-		try_count = 0
-
-
-# Try's to init the event using the given %
-func start_event():
-	try_count = 0
-	
-	if rng.randf_range(0.0, 1.0) > spawn_probability / 100:
-		event_manager.active_events += 1
-		is_available = false
-		is_active = true
-		show()
-
-
-# Disable the event and wait x seconds before beeing available for activation
-func complete_event(success):
-	
-	if !success : 
-		event_manager.events_failed += 1
-	
+# Resolve the event with the given result
+func _complete_event(success := false):
+	if success:
+		on_event_success()
+	else:
+		on_event_fail()
+		
 	hide()
-	event_manager.active_events -= 1
-	is_active = false
+	_set_timer(_disable_event, delay)
+
+
+# On execution time runs out, complete as fail
+func on_timeout():
+	if (minigame_active): return
+	_complete_event(false)
+
+
+# Execute action on event faild
+func on_event_fail():
+	if npc_required <= 0: return
 	
-	await get_tree().create_timer(cool_down).timeout
-	is_available = true
-	try_count = 0
+	var npc = npc_list.pick_random()
+	npc._on_disapear()
+	npc_list.erase(npc)
 
 
-func active_countdown(delta):
-	active_count += 1 * delta;
-	if active_count >= execution_time:
-		complete_event(false)
+# Execute action on event success
+func on_event_success():
+	pass
+
+
+# Disable the event at the end of execution
+func _disable_event():
+	event_manager._enable_event(self)
+	type = original_type
+
+func _enable_event():	
+	show()
+	_enable_notify()
+	_set_timer(_complete_event, execution_time)
+
+# Enable the floating notification
+func _enable_notify():
+	notification.show()
+
+
+# Init timer for event execution
+func _set_timer(method, time):
+	if (timer == null):
+		timer = Timer.new()
+		timer.set_one_shot(true)
+		add_child(timer)
+		
+	timer.timeout.connect(method)
+	timer.start(time)
+
+
+# Return if the event is available for activation
+func _is_available():
+	return available \
+			&& npc_list.size() < max_npc \
+			&& !player_inside \
+			&& !active
 
 
 # Player detection
 func _on_hint_trigger_body_entered(body):
 	if body.name == "Player":
 		hint.show()
-		is_player = true
+		player_inside = true
 	elif body.get_parent().name == "npc":
-		npcs.push_front(body)
+		npc_list.push_front(body)
 
 
 func _on_hint_trigger_body_exited(body):
 	if body.name == "Player":
 		hint.hide()
-		is_player = false
+		player_inside = false
 	elif body.get_parent().name == "NPC":
-		npcs.erase(body)
+		npc_list.erase(body)
