@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=12 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="Texture2D" uid="uid://co3ihpwcy46fv" path="res://Sprites/Background/testbackground.png" id="1_w8vgg"]
-[ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="2_3qwve"]
 [ext_resource type="Script" path="res://Scripts/event_manager.gd" id="3_whmi1"]
 [ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
 [ext_resource type="PackedScene" uid="uid://bjl71q8ph3q5o" path="res://Nodes/Events/bar_fight.tscn" id="5_0wqqi"]
@@ -30,37 +29,19 @@ position = Vector2(905, 464)
 [node name="Events" type="Node2D" parent="."]
 script = ExtResource("3_whmi1")
 
-[node name="Crops" parent="Events" instance=ExtResource("2_3qwve")]
-visible = false
-position = Vector2(1780, -2192)
-execution_time = 40.0
-
-[node name="Event2" parent="Events" instance=ExtResource("2_3qwve")]
-visible = false
-position = Vector2(-2300, 1887)
-execution_time = 40.0
-
 [node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
-visible = false
 position = Vector2(3534, 784)
-execution_time = 40.0
-delay = 5.0
 
-[node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
-visible = false
-position = Vector2(-2292, -804)
-execution_time = 40.0
-delay = 5.0
+[node name="wheel" parent="Events" instance=ExtResource("6_m5r75")]
+position = Vector2(-776, 2173)
+execution_time = 8.0
+delay = 10.0
 type = 1
 
-[node name="wheel_right" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(2986, -860)
-execution_time = 40.0
-type = 1
-
-[node name="wheel_left" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(-893, 2246)
-execution_time = 40.0
+[node name="bar_fight" parent="Events" instance=ExtResource("5_0wqqi")]
+position = Vector2(-2190, -847)
+execution_time = 15.0
+delay = 20.0
 type = 2
 
 [node name="Buildings" type="Node2D" parent="."]
@@ -215,15 +196,15 @@ polygon = PackedVector2Array(2773, 1114, 595, 2198, -1310, 1253, -1046, 1109, 57
 build_mode = 1
 polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 101, 2652, 886)
 
-[node name="NPC" type="Node2D" parent="."]
+[node name="Npc" type="Node2D" parent="."]
 process_mode = 4
 script = ExtResource("8_ohrb5")
 
-[node name="Nun" parent="NPC" instance=ExtResource("9_7rgtb")]
+[node name="Nun" parent="Npc" instance=ExtResource("9_7rgtb")]
 visible = false
 type = 1
 
-[node name="Taverner" parent="NPC" instance=ExtResource("10_v0kva")]
+[node name="Taverner" parent="Npc" instance=ExtResource("10_v0kva")]
 visible = false
 type = 1
 
@@ -275,4 +256,5 @@ position = Vector2(1386, 1969)
 position = Vector2(2705, 1698)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_irvtq")

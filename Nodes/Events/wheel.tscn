@@ -7,8 +7,12 @@ radius = 140.357
 
 [node name="wheel" instance=ExtResource("1_ed15e")]
 visible = false
-execution_time = 20
-cool_down = 25
+
+[node name="hint_trigger" parent="." index="2"]
+visible = false
 
 [node name="CollisionShape2D" parent="hint_trigger" index="0"]
 shape = SubResource("CircleShape2D_8c3ss")
+
+[node name="hint" parent="hint_trigger" index="1"]
+visible = true

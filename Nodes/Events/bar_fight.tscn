@@ -3,8 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://bp32u0v5b3y2s" path="res://Prefabs/event.tscn" id="1_2im80"]
 
 [node name="bar_fight" instance=ExtResource("1_2im80")]
-spawn_probability = 79.73
-npc_requirement = 2
-execution_time = 30
-cool_down = 20
-delay = 5
+visible = false
+
+[node name="hint_trigger" parent="." index="2"]
+visible = false
+
+[node name="hint" parent="hint_trigger" index="1"]
+visible = true
