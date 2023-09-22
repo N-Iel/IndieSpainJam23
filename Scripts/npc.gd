@@ -18,7 +18,8 @@ var on_active_event := false
 @onready var manager = get_parent()
 
 func _ready():
-	pass
+	nav.path_desired_distance = 4.0
+	nav.target_desired_distance = 4.0
 
 func _process(delta):
 	

@@ -59,10 +59,10 @@ position = Vector2(-147, -396)
 position = Vector2(150, -72)
 
 [node name="House8" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
-position = Vector2(1356, -498)
+position = Vector2(1299, -559)
 
 [node name="House9" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
-position = Vector2(1977, -187)
+position = Vector2(1905, -242)
 
 [node name="House10" parent="Buildings/Houses" instance=ExtResource("4_i7ecr")]
 position = Vector2(2676, 383)
