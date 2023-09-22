@@ -17,6 +17,8 @@ texture = ExtResource("2_aeuml")
 [node name="notification" parent="." instance=ExtResource("2_651dk")]
 
 [node name="hint_trigger" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hint_trigger"]
 shape = SubResource("CircleShape2D_mhucg")

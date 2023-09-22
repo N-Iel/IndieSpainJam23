@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-@export_subgroup("Components")
-@export var sprite: Sprite2D
-
 @export_subgroup("Properties")
 @export var movement_speed: float = 200.0
 @export var available := true
@@ -14,11 +11,14 @@ var direction
 var disapeared := false
 var active := false
 
-
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
+@onready var sprite = $Sprite2D
 @onready var manager = get_parent()
 
-func _physics_process(delta):
+func _ready():
+	pass
+
+func _process(delta):
 	
 	if !active || disapeared: return
 	
@@ -30,21 +30,24 @@ func _physics_process(delta):
 
 func _handle_controls():
 	# Movement
-	if (nav.target_position != null):
-		direction = nav.get_next_path_position() - global_position
+	if position.distance_to(target) > 2:
+		direction = nav.get_next_path_position() - global_transform.origin
 	else:
+		_target_reached()
 		direction = Vector2.ZERO
+	
 
 
 func _handle_position(delta):
-	position += movement_speed * direction.normalized() * delta
+	velocity = movement_speed * direction.normalized()
 	
 	if velocity.length() == 0: return
 	sprite.flip_h = velocity.x < 0
 
 
-func _set_active():
-	nav.target_position = target.global_position
+func _set_active(_target):
+	target = _target.global_transform.origin
+	nav.set_target_position(target)
 	active = true
 
 
@@ -59,10 +62,8 @@ func _on_disapear():
 	active = false
 	manager._on_npc_disapear(self)
 
-
-func _on_navigation_agent_2d_target_reached():
-	match type:
-		1: manager._enable_npc(self)
-		0: 
-			hide()
-			manager._enable_npc(self)
+func _target_reached():
+	if type == 0: queue_free()
+	if type == 1: 
+		manager._enable_npc(self)
+		active = false

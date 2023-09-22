@@ -18,7 +18,7 @@ enum Type {Common = 0, Rare = 1, Unique = 2}
 var npc_list := []
 var player_inside := false
 var minigame_active := false
-var timer
+var timer : Timer
 
 func _input(event):
 	if event.is_action_released("Interact") && player_inside && !minigame_active:
@@ -52,7 +52,7 @@ func on_event_fail():
 	event_manager._disable_event(self)
 	
 	# Check for posible disaperances
-	if npc_required <= 0: return
+	if npc_list.size() <= 0: return
 	
 	var npc = npc_list.pick_random()
 	npc._on_disapear()
@@ -61,7 +61,7 @@ func on_event_fail():
 
 # Execute action on event success
 func on_event_success():
-	pass
+	timer.stop()
 
 
 # Disable the event at the end of execution
@@ -88,11 +88,13 @@ func _set_timer(method, time):
 # Return if the event is available for activation
 func _is_available():
 	return available \
-			&& !player_inside
+			&& !player_inside \
+			&& npc_list.size() >= npc_required
 
 
 # Player detection
 func _on_hint_trigger_body_entered(body):
+	print(body.get_parent().name)
 	if body.name == "Player":
 		hint.show()
 		player_inside = true

@@ -1,18 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=10 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="Texture2D" uid="uid://co3ihpwcy46fv" path="res://Sprites/Background/testbackground.png" id="1_w8vgg"]
 [ext_resource type="Script" path="res://Scripts/event_manager.gd" id="3_whmi1"]
 [ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
 [ext_resource type="PackedScene" uid="uid://bjl71q8ph3q5o" path="res://Nodes/Events/bar_fight.tscn" id="5_0wqqi"]
-[ext_resource type="PackedScene" uid="uid://cdtqgo5idap74" path="res://Nodes/Events/wheel.tscn" id="6_m5r75"]
 [ext_resource type="Script" path="res://Scripts/npc_manager.gd" id="8_ohrb5"]
-[ext_resource type="NavigationPolygon" uid="uid://cevuldx3v5vkl" path="res://Prefabs/navigationMan/main.tres" id="8_wwd8c"]
-[ext_resource type="PackedScene" uid="uid://2ddau742e15w" path="res://Nodes/Npcs/nun.tscn" id="9_7rgtb"]
 [ext_resource type="PackedScene" uid="uid://hi6wp8eqhbaj" path="res://Nodes/Npcs/taverner.tscn" id="10_v0kva"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wqw"]
 radius = 92.0869
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6870g"]
+vertices = PackedVector2Array(3280, 986, 4088, 1373, 3779, 1368, 3253, 1114, 2983, 1923, 2983, 1774, 3090, 1039, 2975, 981, 3952, 481, 4115, 572, 2460, 1507, 2153, 1491)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(0, 6, 7, 8, 9), PackedInt32Array(6, 0, 3, 10, 11), PackedInt32Array(4, 11, 10, 5)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(2983, 1923, 2153, 1491, 3090, 1039, 2975, 981, 3952, 481, 4115, 572, 3280, 986, 4088, 1373), PackedVector2Array(2460, 1507, 3253, 1114, 3779, 1368, 2983, 1774)])
 
 [node name="main" type="Node2D"]
 
@@ -21,7 +23,6 @@ texture = ExtResource("1_w8vgg")
 
 [node name="Player" parent="." instance=ExtResource("1_frwqt")]
 position = Vector2(3609, 921)
-collision_mask = 3
 
 [node name="Events" type="Node2D" parent="."]
 script = ExtResource("3_whmi1")
@@ -29,22 +30,6 @@ script = ExtResource("3_whmi1")
 [node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
 position = Vector2(3534, 784)
 npc_required = 1
-max_npc = 2
-
-[node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
-position = Vector2(-2273, -800)
-npc_required = 1
-max_npc = 2
-
-[node name="wheel_left" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(-889, 2267)
-npc_required = 1
-type = 1
-
-[node name="wheel_right" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(2991, -857)
-npc_required = 1
-type = 1
 
 [node name="Buildings" type="Node2D" parent="."]
 position = Vector2(-183, -345)
@@ -200,65 +185,75 @@ polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 
 
 [node name="Npc" type="Node2D" parent="."]
 script = ExtResource("8_ohrb5")
-delay_random = 3.0
 
 [node name="Taverner" parent="Npc" instance=ExtResource("10_v0kva")]
 visible = false
 movement_speed = 200.0
-type = 1
-
-[node name="Nun" parent="Npc" instance=ExtResource("9_7rgtb")]
-visible = false
+available = true
 type = 1
 
 [node name="Locations" type="Node2D" parent="."]
 
-[node name="Location07" type="Node2D" parent="Locations"]
-position = Vector2(2860, -2022)
-
 [node name="Location15" type="Node2D" parent="Locations"]
 position = Vector2(2705, 1698)
 
-[node name="Location01" type="Node2D" parent="Locations"]
-position = Vector2(610, 1271)
-
-[node name="Location02" type="Node2D" parent="Locations"]
-position = Vector2(1716, 720)
-
-[node name="Location03" type="Node2D" parent="Locations"]
-position = Vector2(2669, 236)
-
-[node name="Location04" type="Node2D" parent="Locations"]
-position = Vector2(1963, -363)
-
-[node name="Location05" type="Node2D" parent="Locations"]
-position = Vector2(4553, -1004)
-
-[node name="Location06" type="Node2D" parent="Locations"]
-position = Vector2(3316, -1780)
-
-[node name="Location08" type="Node2D" parent="Locations"]
-position = Vector2(-41, -561)
-
-[node name="Location09" type="Node2D" parent="Locations"]
-position = Vector2(993, -661)
-
-[node name="Location10" type="Node2D" parent="Locations"]
-position = Vector2(-1224, -1053)
-
-[node name="Location11" type="Node2D" parent="Locations"]
-position = Vector2(-632, -1352)
-
-[node name="Location12" type="Node2D" parent="Locations"]
-position = Vector2(-1836, 1000)
-
-[node name="Location13" type="Node2D" parent="Locations"]
-position = Vector2(-1337, 1449)
-
-[node name="Location14" type="Node2D" parent="Locations"]
-position = Vector2(1386, 1969)
-
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("8_wwd8c")
+navigation_polygon = SubResource("NavigationPolygon_6870g")
 
 [node name="Temp_locations" type="Node" parent="."]
+
+[node name="Location01" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(610, 1271)
+
+[node name="Location02" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(1716, 720)
+
+[node name="Location03" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(2669, 236)
+
+[node name="Location04" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(1963, -363)
+
+[node name="Location05" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(4553, -1004)
+
+[node name="Location06" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(3316, -1780)
+
+[node name="Location07" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(2860, -2022)
+
+[node name="Location08" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(-41, -561)
+
+[node name="Location09" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(993, -661)
+
+[node name="Location10" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(-1224, -1053)
+
+[node name="Location11" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(-632, -1352)
+
+[node name="Location12" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(-1836, 1000)
+
+[node name="Location13" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(-1337, 1449)
+
+[node name="Location14" type="Node2D" parent="Temp_locations"]
+process_mode = 4
+position = Vector2(1386, 1969)
