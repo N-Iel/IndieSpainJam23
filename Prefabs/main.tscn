@@ -205,7 +205,8 @@ polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 
 
 [node name="Npc" type="Node2D" parent="."]
 script = ExtResource("8_ohrb5")
-delay_random = 3.0
+delay_random = 1.0
+max_random = 15
 
 [node name="Taverner" parent="Npc" instance=ExtResource("10_v0kva")]
 visible = false

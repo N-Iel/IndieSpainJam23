@@ -72,7 +72,8 @@ func _spawn_random():
 
 # Get an available npc from the list and update it's target
 func _spawn_special():
-	_set_special_route(available_npc.filter(func(npc): return npc.type == 1).pick_random())
+	if available_npc.filter(func(npc): return npc.type == 1).size() > 0:
+		_set_special_route(available_npc.filter(func(npc): return npc.type == 1).pick_random())
 
 
 # Get an origin and target for the random npc

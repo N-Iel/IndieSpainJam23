@@ -110,7 +110,7 @@ func _on_hint_trigger_body_entered(body):
 	if body.name == "Player":
 		hint.show()
 		player_inside = true
-	elif body.get_parent().name == "Npc":
+	elif body.get_parent().name == "Npc" && body.type == 1:
 		npc_list.push_front(body)
 		body.time_on_location = execution_time
 
@@ -119,5 +119,5 @@ func _on_hint_trigger_body_exited(body):
 	if body.name == "Player":
 		hint.hide()
 		player_inside = false
-	elif body.get_parent().name == "Npc":
+	elif body.get_parent().name == "Npc" && body.type == 1:
 		npc_list.erase(body)

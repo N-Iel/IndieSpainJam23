@@ -26,7 +26,7 @@ shape = SubResource("CircleShape2D_mhucg")
 [node name="hint" type="Sprite2D" parent="hint_trigger"]
 visible = false
 texture_filter = 1
-position = Vector2(0, -72)
+position = Vector2(0, -152)
 scale = Vector2(3, 3)
 texture = ExtResource("4_r8vyi")
 
