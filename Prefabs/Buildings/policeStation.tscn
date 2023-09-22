@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdif8lgff6j52"]
+
+[ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="1_01onm"]
+[ext_resource type="Texture2D" uid="uid://0srl5bcfgeqr" path="res://Sprites/Buildings/policeStation.png" id="2_qc4uw"]
+
+[node name="House" instance=ExtResource("1_01onm")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-82, -266)
+texture = ExtResource("2_qc4uw")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(61, -199, 315, -75, 169, -7, 271, 62, -3, 198, -83, 135, -253, 223, -525, 83)

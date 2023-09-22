@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://mh4qqn2owknb"]
+
+[ext_resource type="PackedScene" uid="uid://cdxiuaqgq1klx" path="res://Prefabs/Buildings/Church.tscn" id="1_r4rwu"]
+[ext_resource type="Texture2D" uid="uid://dculwxge1i26p" path="res://Sprites/Buildings/inn.png" id="2_fpfnw"]
+
+[node name="House" instance=ExtResource("1_r4rwu")]
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-160, -162)
+texture = ExtResource("2_fpfnw")
+
+[node name="CollisionPolygon2D" parent="." index="1"]
+polygon = PackedVector2Array(21, -201, 237, -63, -311, 227, -575, 99)

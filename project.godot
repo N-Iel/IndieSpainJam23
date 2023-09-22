@@ -60,10 +60,6 @@ Interact={
 2d_physics/layer_2="Events"
 2d_physics/layer_3="Npcs"
 
-[navigation]
-
-2d/default_edge_connection_margin=100
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

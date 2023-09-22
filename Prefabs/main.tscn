@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nalvv0qdyvup"]
+[gd_scene load_steps=15 format=3 uid="uid://nalvv0qdyvup"]
 
 [ext_resource type="PackedScene" uid="uid://dkr5cx7fcjke3" path="res://Prefabs/player.tscn" id="1_frwqt"]
 [ext_resource type="Texture2D" uid="uid://co3ihpwcy46fv" path="res://Sprites/Background/testbackground.png" id="1_w8vgg"]
@@ -6,9 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dex1hl4wccske" path="res://Prefabs/house.tscn" id="4_i7ecr"]
 [ext_resource type="PackedScene" uid="uid://bjl71q8ph3q5o" path="res://Nodes/Events/bar_fight.tscn" id="5_0wqqi"]
 [ext_resource type="PackedScene" uid="uid://cdtqgo5idap74" path="res://Nodes/Events/wheel.tscn" id="6_m5r75"]
+[ext_resource type="PackedScene" uid="uid://bdif8lgff6j52" path="res://Prefabs/Buildings/policeStation.tscn" id="7_lcpfe"]
+[ext_resource type="PackedScene" uid="uid://mh4qqn2owknb" path="res://Prefabs/Buildings/inn.tscn" id="8_ansap"]
 [ext_resource type="Script" path="res://Scripts/npc_manager.gd" id="8_ohrb5"]
 [ext_resource type="NavigationPolygon" uid="uid://cevuldx3v5vkl" path="res://Prefabs/navigationMan/main.tres" id="8_wwd8c"]
 [ext_resource type="PackedScene" uid="uid://2ddau742e15w" path="res://Nodes/Npcs/nun.tscn" id="9_7rgtb"]
+[ext_resource type="PackedScene" uid="uid://cdxiuaqgq1klx" path="res://Prefabs/Buildings/Church.tscn" id="9_246tf"]
 [ext_resource type="PackedScene" uid="uid://hi6wp8eqhbaj" path="res://Nodes/Npcs/taverner.tscn" id="10_v0kva"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o1wqw"]
@@ -19,37 +22,9 @@ radius = 92.0869
 [node name="background" type="Sprite2D" parent="."]
 texture = ExtResource("1_w8vgg")
 
-[node name="Player" parent="." instance=ExtResource("1_frwqt")]
-position = Vector2(544, 158)
-collision_mask = 3
-
-[node name="Events" type="Node2D" parent="."]
-script = ExtResource("3_whmi1")
-spawn_rate = 2.0
-time_between_events = 0.1
-unique = 0.0
-
-[node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
-position = Vector2(3534, 784)
-execution_time = 25.0
-npc_required = 1
-max_npc = 2
-
-[node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
-position = Vector2(-2273, -800)
-execution_time = 25.0
-npc_required = 1
-max_npc = 2
-
-[node name="wheel_left" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(-889, 2267)
-npc_required = 1
-type = 1
-
-[node name="wheel_right" parent="Events" instance=ExtResource("6_m5r75")]
-position = Vector2(2991, -857)
-npc_required = 1
-type = 1
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = ExtResource("8_wwd8c")
+use_edge_connections = false
 
 [node name="Buildings" type="Node2D" parent="."]
 position = Vector2(-183, -345)
@@ -124,15 +99,6 @@ position = Vector2(-205, -101)
 
 [node name="Main" type="Node2D" parent="Buildings"]
 
-[node name="Police" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
-position = Vector2(338, 385)
-
-[node name="House" parent="Buildings/Main/Police" instance=ExtResource("4_i7ecr")]
-position = Vector2(272, -133)
-
-[node name="House2" parent="Buildings/Main/Police" instance=ExtResource("4_i7ecr")]
-position = Vector2(208, -37)
-
 [node name="Wheel" type="StaticBody2D" parent="Buildings/Main"]
 position = Vector2(3176, -503)
 
@@ -147,18 +113,6 @@ position = Vector2(-710, 2593)
 position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_o1wqw")
 
-[node name="church" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
-position = Vector2(-3719, -195)
-
-[node name="House" parent="Buildings/Main/church" instance=ExtResource("4_i7ecr")]
-position = Vector2(272, -135)
-
-[node name="bar_top" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
-position = Vector2(-2394, -588)
-
-[node name="House" parent="Buildings/Main/bar_top" instance=ExtResource("4_i7ecr")]
-position = Vector2(272, -135)
-
 [node name="horseHouse" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
 position = Vector2(741, -1344)
 
@@ -171,11 +125,17 @@ position = Vector2(-81, 2334)
 [node name="House" parent="Buildings/Main/horseHouse2" instance=ExtResource("4_i7ecr")]
 position = Vector2(272, -135)
 
-[node name="bar_bot" parent="Buildings/Main" instance=ExtResource("4_i7ecr")]
-position = Vector2(3371, 1001)
+[node name="House" parent="Buildings/Main" instance=ExtResource("7_lcpfe")]
+position = Vector2(587, 361)
 
-[node name="House" parent="Buildings/Main/bar_bot" instance=ExtResource("4_i7ecr")]
-position = Vector2(272, -135)
+[node name="Inn_bot" parent="Buildings/Main" instance=ExtResource("8_ansap")]
+position = Vector2(3660, 991)
+
+[node name="Inn_top" parent="Buildings/Main" instance=ExtResource("8_ansap")]
+position = Vector2(-2076, -617)
+
+[node name="Church" parent="Buildings/Main" instance=ExtResource("9_246tf")]
+position = Vector2(-3422, -221)
 
 [node name="River" type="Node2D" parent="Buildings"]
 
@@ -202,6 +162,39 @@ polygon = PackedVector2Array(2773, 1114, 595, 2198, -1310, 1253, -1046, 1109, 57
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Buildings/River/River_bot"]
 build_mode = 1
 polygon = PackedVector2Array(2910, 1048, 4234, 368, 4911, 701, 5154, 545, 4234, 101, 2652, 886)
+
+[node name="Events" type="Node2D" parent="."]
+script = ExtResource("3_whmi1")
+spawn_rate = 2.0
+time_between_events = 0.1
+unique = 0.0
+
+[node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
+position = Vector2(3534, 784)
+execution_time = 25.0
+npc_required = 1
+max_npc = 2
+
+[node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
+position = Vector2(-2273, -800)
+execution_time = 25.0
+npc_required = 1
+max_npc = 2
+
+[node name="wheel_left" parent="Events" instance=ExtResource("6_m5r75")]
+position = Vector2(-889, 2267)
+npc_required = 1
+type = 1
+
+[node name="wheel_right" parent="Events" instance=ExtResource("6_m5r75")]
+position = Vector2(2991, -857)
+npc_required = 1
+type = 1
+
+[node name="Player" parent="." instance=ExtResource("1_frwqt")]
+visibility_layer = 2
+position = Vector2(599, 110)
+collision_mask = 3
 
 [node name="Npc" type="Node2D" parent="."]
 script = ExtResource("8_ohrb5")
@@ -266,8 +259,5 @@ position = Vector2(3496, 782)
 
 [node name="Location17" type="Node2D" parent="Locations"]
 position = Vector2(-2315, -791)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("8_wwd8c")
 
 [node name="Temp_locations" type="Node" parent="."]

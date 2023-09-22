@@ -1,7 +1,13 @@
-[gd_scene format=3 uid="uid://dex1hl4wccske"]
+[gd_scene load_steps=2 format=3 uid="uid://dex1hl4wccske"]
+
+[ext_resource type="Texture2D" uid="uid://dqujroro66nj0" path="res://Sprites/Buildings/house.png" id="1_sd6tu"]
 
 [node name="House" type="StaticBody2D"]
 position = Vector2(1676, 911)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -118)
+texture = ExtResource("1_sd6tu")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 build_mode = 1
