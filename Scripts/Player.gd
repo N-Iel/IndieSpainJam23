@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 var movement_velocity: Vector2
 
-func _physics_process(delta):
+func _process(delta):
 	handle_controls()
 	handle_position(delta)
 	
@@ -28,7 +28,7 @@ func handle_position(delta):
 	position += velocity * delta
 	
 	if velocity.length() == 0: return
-	sprite.flip_h = velocity.x < 0
+	sprite.flip_h = velocity.x > 0
 	
 func cartesian_to_isommetric(cartesian):
 	return Vector2(cartesian.y - cartesian.x, (cartesian.y + cartesian.x) / 2)

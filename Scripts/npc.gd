@@ -10,6 +10,8 @@ var origin
 var direction 
 var disapeared := false
 var active := false
+var time_on_location := 10
+var on_active_event := false
 
 @onready var nav: NavigationAgent2D = $NavigationAgent2D
 @onready var sprite = $Sprite2D
@@ -20,7 +22,7 @@ func _ready():
 
 func _process(delta):
 	
-	if !active || disapeared: return
+	if !active || disapeared || on_active_event: return
 	
 	_handle_controls()
 	_handle_position(delta)
@@ -42,7 +44,7 @@ func _handle_position(delta):
 	velocity = movement_speed * direction.normalized()
 	
 	if velocity.length() == 0: return
-	sprite.flip_h = velocity.x < 0
+	sprite.flip_h = velocity.x > 0
 
 
 func _set_active(_target):
@@ -62,8 +64,24 @@ func _on_disapear():
 	active = false
 	manager._on_npc_disapear(self)
 
-func _target_reached():
-	if type == 0: queue_free()
-	if type == 1: 
+func unlock_npc():
+	if !on_active_event:
 		manager._enable_npc(self)
+
+func _target_reached():
+	if type == 0: 
+		manager.random_count -= 1
+		queue_free()
+
+	if type == 1: 
 		active = false
+		_set_timer(time_on_location)
+
+# Init timer for event execution
+func _set_timer(time):
+	var timer = Timer.new()
+	timer.set_one_shot(true)
+	add_child(timer)
+		
+	timer.timeout.connect(unlock_npc)
+	timer.start(time)

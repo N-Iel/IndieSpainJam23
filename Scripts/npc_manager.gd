@@ -61,7 +61,6 @@ func _spawn_random_npc():
 func _spawn_special_npc():
 	if (special_count >= max_special): return
 	_spawn_special()
-	special_count += 1
 
 
 # Generate a new random npc and set the route
@@ -95,8 +94,9 @@ func _set_special_route(npc):
 	if npc.origin == null:
 		npc._set_origin(random_locations.pick_random())
 		npc.show()
+		special_count += 1
 	
-	var target = _get_special_location()
+	var target = _get_special_location(npc.target)
 	
 	if target == null: 
 		print("No available locations")
@@ -108,22 +108,28 @@ func _set_special_route(npc):
 
 
 # Filter available locations for special npcs
-func _get_special_location():
+func _get_special_location(current_target = null):
 	var available_locations = special_locations.filter(func(location): return (location.has_method("_is_available") && location.available == true))
-	return available_locations.pick_random()
+	var new_location = available_locations.pick_random()
+	
+	if current_target != null && available_locations.size() > 1:
+		while  current_target == new_location.global_transform.origin:
+			new_location = available_locations.pick_random()
+	
+	return new_location
 
 
 # Update the list of npcs on disapear
 func _on_npc_disapear(npc):
 	active_npc.erase(npc)
 	disapeared_npc.push_front(npc)
+	special_count -= 1
 
 
 # Update npc state
 func _enable_npc(npc):
 	active_npc.erase(npc)
 	available_npc.push_front(npc)
-
 
 # Init timer for execution
 func _set_timer(timer, function, time):

@@ -57,11 +57,21 @@ func on_event_fail():
 	var npc = npc_list.pick_random()
 	npc._on_disapear()
 	npc_list.erase(npc)
+	
+	for _npc in npc_list:
+		_npc.on_active_event = false
+		_npc.unlock_npc()
+	
+	npc_list.clear()
 
 
 # Execute action on event success
 func on_event_success():
-	timer.stop()
+	for _npc in npc_list:
+		_npc.on_active_event = false
+		_npc.unlock_npc()
+	
+	npc_list.clear()
 
 
 # Disable the event at the end of execution
@@ -74,6 +84,8 @@ func _disable_event():
 func _enable_event():	
 	show()
 	_set_timer(_complete_event, execution_time)
+	for npc in npc_list:
+		npc.on_active_event = true
 
 # Init timer for event execution
 func _set_timer(method, time):
@@ -100,6 +112,7 @@ func _on_hint_trigger_body_entered(body):
 		player_inside = true
 	elif body.get_parent().name == "Npc":
 		npc_list.push_front(body)
+		body.time_on_location = execution_time
 
 
 func _on_hint_trigger_body_exited(body):

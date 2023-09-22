@@ -20,19 +20,24 @@ radius = 92.0869
 texture = ExtResource("1_w8vgg")
 
 [node name="Player" parent="." instance=ExtResource("1_frwqt")]
-position = Vector2(3609, 921)
+position = Vector2(544, 158)
 collision_mask = 3
 
 [node name="Events" type="Node2D" parent="."]
 script = ExtResource("3_whmi1")
+spawn_rate = 2.0
+time_between_events = 0.1
+unique = 0.0
 
 [node name="bar_fight_bot" parent="Events" instance=ExtResource("5_0wqqi")]
 position = Vector2(3534, 784)
+execution_time = 25.0
 npc_required = 1
 max_npc = 2
 
 [node name="bar_fight_top" parent="Events" instance=ExtResource("5_0wqqi")]
 position = Vector2(-2273, -800)
+execution_time = 25.0
 npc_required = 1
 max_npc = 2
 
@@ -204,12 +209,9 @@ delay_random = 3.0
 
 [node name="Taverner" parent="Npc" instance=ExtResource("10_v0kva")]
 visible = false
-movement_speed = 200.0
-type = 1
 
 [node name="Nun" parent="Npc" instance=ExtResource("9_7rgtb")]
 visible = false
-type = 1
 
 [node name="Locations" type="Node2D" parent="."]
 
@@ -257,6 +259,12 @@ position = Vector2(-1337, 1449)
 
 [node name="Location14" type="Node2D" parent="Locations"]
 position = Vector2(1386, 1969)
+
+[node name="Location16" type="Node2D" parent="Locations"]
+position = Vector2(3496, 782)
+
+[node name="Location17" type="Node2D" parent="Locations"]
+position = Vector2(-2315, -791)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = ExtResource("8_wwd8c")

@@ -6,9 +6,15 @@ var event_list = [] # similar to get children probably optional
 var active_events = [] # list of active events
 var available_events = [] # list of events ready to get active
 
+@export_category("Params")
 @export var event_limit := 2
 @export var spawn_rate := 5.0
 @export var time_between_events := 5.0
+
+@export_category("Probability")
+@export var common := 90.0
+@export var rare := 70.0
+@export var unique := 50.0
 
 var timer
 var active := true
@@ -30,14 +36,14 @@ func _active_event():
 	
 	# Get the rarity of the next event
 	var type
-	var result = randf_range(0,1)
+	var result = randf_range(0,100)
 	
 	# Select a event based on rarity
-	if (result <= 0.3):
+	if (result <= unique):
 		type = Type.Unique
-	elif (result <= 0.5):
+	elif (result <= rare):
 		type = Type.Rare
-	elif (result <= 0.8):
+	elif (result <= common):
 		type = Type.Common
 		
 	_get_event(type)
